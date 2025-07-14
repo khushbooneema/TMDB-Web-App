@@ -1,0 +1,135 @@
+.movie-grid {
+    position: relative;
+    margin-inline: 16px;
+    width: 200px;
+    height: 280px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+.img {
+    width: 180px;
+    height: 280px;  
+    border-radius: 10px;
+}
+
+.movie-list {
+    display: flex;
+    list-style-type: none;
+    padding: 10px;
+    gap: 10px;
+}
+
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    width: 200px;
+    height: 40px;
+    padding: 10px;
+    font-weight: bold;
+    background-color: #aca9a9;
+    color: white;
+    border: none;
+    font-size: 1rem;
+}
+
+.toggle-button.active {
+    background-color:  #333;
+}
+
+.toggle-button.hover {
+    background-color: #555;
+}
+
+.progress {
+    --size: 50px;
+    position: absolute;
+    bottom: -12px;
+    left: -12px;
+    width: var(--size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: conic-gradient(
+        green var(--progress, 0), 
+        #062205 0
+    );
+    display: grid;
+    place-items: center;
+}
+
+.progress::after {
+    width: calc(var(--size) * 0.85);
+    aspect-ratio: 1;
+    content: attr(data-value);
+    display: grid;
+    background: black;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    place-content: center;
+    font-family: arial;
+}
+
+.three-dot-icon {
+    display: flex;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    background-color: rgb(186, 184, 182);
+    border-radius: 50%;
+}
+
+.dot {
+    width: 3px;
+    height: 3px;
+    background-color: #333131;
+    border-radius: 50%;
+}
+
+.dot-icon-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2;
+}
+
+.action-list {
+    position: absolute;
+    top: 45px;
+    right: 5px;
+    background: white;
+    color: #3d3c3c;
+    border-radius: 8px;
+    z-index: 3;
+    overflow: hidden;
+}
+
+.action-list div {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    padding: 10px 16px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    border-bottom: 1px solid #8a8080;
+}
+
+.action-list div:last-child {
+    border-bottom: none;
+}
