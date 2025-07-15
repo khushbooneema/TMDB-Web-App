@@ -82,6 +82,13 @@ export const useUpcomingMovies = () => {
     const [upcomingLoading, setLoading] = useState(false);
     const [upcomingError, setError] = useState(null as string | null);
 
+    function filterUpcomingMovies(movies: Movie[]) {
+        return movies.filter(movie => {
+            const releaseDate = new Date(movie.release_date);
+            return releaseDate > new Date();
+        })
+    }
+
     async function fetchUpcomingMovies(page: number = 1) {
         setLoading(true);
         setError(null);
@@ -94,7 +101,8 @@ export const useUpcomingMovies = () => {
             );
 
             if (response.status === 200) {
-                setUpcomingMovies(response.data);
+                const upcomingMovies = filterUpcomingMovies(response.data);
+                setUpcomingMovies(upcomingMovies);
             } else {
                 setError(`Error fetching movies: ${response.statusText}`);
                 throw new Error(`Error fetching movies: ${response.statusText}`);

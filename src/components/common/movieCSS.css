@@ -1,9 +1,7 @@
 .movie-grid {
     position: relative;
     margin-inline: 16px;
-    width: 200px;
     height: 280px;
-    background-color: #f0f0f0;
     border-radius: 10px;
 }
 
@@ -14,6 +12,9 @@
 }
 
 .movie-list {
+    flex: 0 0 auto;
+    width: 200px;
+    scroll-snap-align: start;
     display: flex;
     list-style-type: none;
     padding: 10px;
