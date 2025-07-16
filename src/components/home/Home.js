@@ -3,7 +3,7 @@ import { usePopularMovies, useNowPlayingMovies, useUpcomingMovies } from '../../
 import MovieList from '../common/MovieList';
 import ToggleButtons from '../common/ToggleButton';
 import './home.css';
-import Search from '../search/search';
+import SearchBar from '../search/searchBar'; 
 
 function Home() {
     const { popularMovies, popularLoading, popularError, fetchPopularMovies } = usePopularMovies()
@@ -29,14 +29,11 @@ function Home() {
     return (
         <div className='homeBody'>
             <div className='mainDivContainer'> 
-                <Search />
+                <SearchBar />
                 <div className='movieDivContainer'>
                     <h2 className='header'>Popular Movies</h2>
                     <div className='movieListDiv'>
-                        <div className='movieListContent'>
-                             <MovieList movies={popularMovies} error={popularError} loading={popularLoading} /> 
-                        </div>
-                        
+                        <MovieList movies={popularMovies} error={popularError} loading={popularLoading} /> 
                     </div>
 
                     <h2 className='header'>Now Playing Movies</h2>

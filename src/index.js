@@ -5,12 +5,19 @@ import reportWebVitals from './reportWebVitals';
 import Home from './components/home/Home';
 import store from './redux/store/store'
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Search from './components/search/search';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-       <Home />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
+        </Routes>
+      </Router>
     </Provider>
   </React.StrictMode>
 );
