@@ -15,7 +15,6 @@ const SearchBar = () => {
         if (searchText.trim() === "") 
             return 
         
-        searchMovies(searchText);
         navigation('./search?query=' + encodeURIComponent(searchText.trim()));
     }
 
