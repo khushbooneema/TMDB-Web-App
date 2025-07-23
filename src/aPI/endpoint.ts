@@ -21,6 +21,7 @@ export interface MovieDetail extends Movie {
     runtime: number;
     languages: Language[];
     production_companies: ProductionCompany[];
+    status: string
 }
 
 export interface Language {
@@ -48,4 +49,42 @@ export interface User {
     emailId: string,
     country: string,
     zipcode: string
+}
+
+export interface MovieDetail extends Movie {
+    runtime: number;
+    languages: Language[];
+    production_companies: ProductionCompany[];
+}
+
+export interface Language {
+    name: string;
+    english_name: string;
+}
+
+export interface ProductionCompany {
+    id: number;
+    name: string;
+    logo_path: string;
+    origin_country: string;
+}
+
+export interface MovieCredits {
+    cast: CastMembers[]
+}
+
+interface CastMembers {
+    id: number;
+    name: string;
+    character: string;
+    profile_path: string;
+}
+
+export interface People {
+    id: number;
+    gender: string;
+    name: string;
+    profile_path: string;
+    popularity: number;
+    known_for_department: string
 }

@@ -2,6 +2,10 @@ import { useState } from "react";
 import { Movie } from "../aPI/endpoint";
 import { apiRequest } from "../aPI/apiRequest";
 
+export const useMovieDetails = (movieId: number) => {
+    const [movieDetails, setMovieDetails] = useState<Movie | null>(null);
+}
+
 export const usePopularMovies = () => {
     const [popularMovies, setPopularMovies] = useState([] as Movie[]);
     const [popularLoading, setLoading] = useState(false);

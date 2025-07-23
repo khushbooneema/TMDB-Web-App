@@ -31,13 +31,15 @@ export const useLocalStorageItems = () => {
     }
 
     function removeToFavLocalStorage(id: number) {
-        const items = favorites.filter(item => item !== id)
+        const items =  [...favorites] 
+        items.filter(item => item !== id)
         setFavorites(items)
         localStorage.setItem(Save_Favorites_Key, JSON.stringify(items))
     }
 
     function removeToWatchlistLocalStorage(id: number) {
-        const items = watchList.filter(item => item !== id)
+        const items = [...watchList]
+        items.filter(item => item !== id)
         setWatchlist(items)
         localStorage.setItem(Save_Watchlist_Key, JSON.stringify(items))
     }
