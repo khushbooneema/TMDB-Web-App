@@ -4,13 +4,14 @@ import './search.css';
 import { useSearch } from "../../hooks/useSearch";
 import SearchItemGrid from "../common/searchItemGrid";
 import { Movie, People } from "../../aPI/endpoint";
+import { PeopleGrid } from "../common/peopleGrid";
 
 const Search = () => {
     const [searchquery] = useSearchParams();
     const [selectedIndex, setSelectedIndex] = useState<number>(0)
     const [searchResults, setSearchResults] = useState<(Movie | People)[]>([]);
     const searchText= searchquery.get('query');
-    const { movies, tvShows, people, searchMovies, searchTVShows, searchPeople } = useSearch();
+    const { movies, tvShows, people, searchMovies, searchTVShows, searchPeople, totalMovies, totalPeople, totalTvShows } = useSearch();
 
     const categories = ['Movies', 'TV Shows', 'People'];
 
@@ -31,6 +32,15 @@ const Search = () => {
         }
     }
 
+    const getTotalResults = (index: number) => {
+        switch (index) {
+            case 0: return totalMovies
+            case 1: return totalTvShows
+            case 2: return totalPeople
+            default: return 0
+        }
+    }
+
     return (
         <div className="SearchBody">
             <div className="categoryContainer">
@@ -38,7 +48,10 @@ const Search = () => {
                     <th className="categoryHeader">Search Results</th>
                     {categories.map((category, index) => (
                         <tr className="categoryRow" key={index}>
-                            <td onClick={() => setSelectedIndex(index)}>{category}</td>
+                            <td onClick={() => setSelectedIndex(index)}>
+                                <span>{category}</span>
+                                <span className="categoryRow-total">{getTotalResults(index)}</span>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
@@ -75,8 +88,20 @@ const Search = () => {
             )}
 
             { selectedIndex == 2 && (
-                <div>People is in work in progress {searchPeople.length}</div>
-            )}  
+                <div className="searchResultsContainer">
+                    { (people.length > 0) ? (
+                    people.map((item) => (
+                        <PeopleGrid
+                            key={item.id}
+                            person={item}
+                        />
+                    ))
+                ) : (
+                    <div>No results found</div>
+                )}
+                </div>
+            )}
+
 
             
         </div>

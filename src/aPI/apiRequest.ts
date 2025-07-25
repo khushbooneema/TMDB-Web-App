@@ -36,7 +36,7 @@ export async function apiRequest<T>(
         const data = await response.json();
 
         return ({
-            data: data.results || [],
+            data: data || [],
             status: response.status,
             statusText: response.statusText
         })

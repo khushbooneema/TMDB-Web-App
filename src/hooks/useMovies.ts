@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Movie } from "../aPI/endpoint";
+import { Movie, MovieResponse } from "../aPI/endpoint";
 import { apiRequest } from "../aPI/apiRequest";
 
 export const useMovieDetails = (movieId: number) => {
@@ -16,7 +16,7 @@ export const usePopularMovies = () => {
         setError(null);
 
         try {
-            const response = await apiRequest<Movie[]>(
+            const response = await apiRequest<MovieResponse>(
                 'movie/popular',
                 { method: 'GET', },
                 { page: page, include_adult: false, sortBy: 'popularity.desc' }
@@ -24,7 +24,7 @@ export const usePopularMovies = () => {
 
             
             if (response.status === 200) {
-                setPopularMovies(response.data);
+                setPopularMovies(response.data.results);
             } else {
                 setError(`Error fetching movies: ${response.statusText}`);
                 throw new Error(`Error fetching movies: ${response.statusText}`);
@@ -54,14 +54,14 @@ export const useNowPlayingMovies = () => {
         setError(null);
 
         try {
-            const response = await apiRequest<Movie[]>(
+            const response = await apiRequest<MovieResponse>(
                 'movie/now_playing',
                 { method: 'GET', },
                 { page: page, include_adult: false }
             );
 
             if (response.status === 200) {
-                setNowPlayingMovies(response.data);
+                setNowPlayingMovies(response.data.results);
             } else {
                 setError(`Error fetching movies: ${response.statusText}`);
                 throw new Error(`Error fetching movies: ${response.statusText}`);
@@ -98,14 +98,14 @@ export const useUpcomingMovies = () => {
         setError(null);
 
         try {
-            const response = await apiRequest<Movie[]>(
+            const response = await apiRequest<MovieResponse>(
                 'movie/upcoming',
                 { method: 'GET', },
                 { page: page, include_adult: false, sortBy: 'popularity.desc' }
             );
 
             if (response.status === 200) {
-                const upcomingMovies = filterUpcomingMovies(response.data);
+                const upcomingMovies = filterUpcomingMovies(response.data.results);
                 setUpcomingMovies(upcomingMovies);
             } else {
                 setError(`Error fetching movies: ${response.statusText}`);

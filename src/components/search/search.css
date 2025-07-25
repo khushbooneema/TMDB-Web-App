@@ -49,6 +49,14 @@
     justify-content: center;
 }
 
+.categoryRow-total {
+    margin-left: 8px;
+    background-color: cadetblue;
+    border-radius: 5px;
+    color: rgb(12, 12, 12);
+    padding: 3px 5px;
+}
+
 .categoryRow:hover {
     background-color: #f0f0f0;
 }

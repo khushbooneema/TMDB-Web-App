@@ -13,8 +13,8 @@ export interface Movie {
 export interface MovieResponse {
     page: number;
     results: Movie[];
-    totalPages: number;
-    totalResults: number;
+    total_pages: number;
+    total_results: number;
 }
 
 export interface MovieDetail extends Movie {
@@ -80,6 +80,13 @@ interface CastMembers {
     profile_path: string;
 }
 
+export interface PeopleResponse {
+    page: number;
+    results: People[];
+    total_pages: number;
+    total_results: number;
+}
+
 export interface People {
     id: number;
     gender: string;
@@ -87,4 +94,5 @@ export interface People {
     profile_path: string;
     popularity: number;
     known_for_department: string
+    known_for: Movie[];
 }

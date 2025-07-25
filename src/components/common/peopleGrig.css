@@ -1,45 +1,44 @@
-.search-item {
+.people-item {
     display: flex;
     flex-direction: row;
     border-radius: 8px;
-    min-height: 100px;
+    height: 80px;
     border: 1px solid white;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.search-item:hover {
+.people-item:hover {
     background-color: #f0f0f0;
 }
 
-.search-item-img {
-    display: inline-block;
+.people-item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.people-item-img {
     width: 100px;
-    background-color: aquamarine;
     object-fit: cover;
     border-top-left-radius: 8px;
     border-bottom-left-radius: 8px;
     margin-right: 16px;
 }
 
-.search-item-details {
-    display: flex;
-    flex-direction: column;
-}
-
-.search-item-title {
+.people-item-name {
     font-size: 16px;
     font-weight: bold;
     color: #333;
     padding-bottom: 4px;
     padding-top: 8px;
 }
-.search-item-overview {
-    font-size: 12px;
+
+.people-item-ActingText {
+    font-size: 14px;
+    font-weight: bold;
     color: #090909;
-    padding-top: 12px;
 }
 
-.search-item-release-date {
-    font-size: 12px;
-    color: #ff9800;
+.people-item-ActingType {
+    font-size: 14px;
+    color: #3d3c3c;
 }

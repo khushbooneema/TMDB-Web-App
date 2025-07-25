@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Movie, People } from '../aPI/endpoint';
+import { Movie, MovieResponse, People, PeopleResponse } from '../aPI/endpoint';
 import { apiRequest } from '../aPI/apiRequest';
 import { queries } from '@testing-library/dom';
 
@@ -9,18 +9,22 @@ export const useSearch = () => {
     const [people, setPeople] = useState<People[]>([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null as string | null);
+    const [totalMovies, setTotalMovies] = useState(0);
+    const [totalTvShows, setTotalTvShows] = useState(0);
+    const [totalPeople, setTotalPeople] = useState(0);
 
     async function searchMovies(searchItem: string) {
         try {
             setLoading(true);
-            const response = await apiRequest<Movie[]>(
+            const response = await apiRequest<MovieResponse>(
                 'search/movie',
                 { method: 'GET' },
                 { query: searchItem, include_adult: false }
             );
 
             if (response.status === 200) {
-                setMovies(response.data);
+                setMovies(response.data.results);
+                setTotalMovies(response.data.total_results);
                 console.log('Movies results:', response.data);
             } else {
                 throw new Error(`Error fetching search results: ${response.statusText}`);
@@ -37,15 +41,15 @@ export const useSearch = () => {
     async function searchTVShows(searchText:string) {
         try {
             setLoading(true);
-            const response = await apiRequest<Movie[]>(
+            const response = await apiRequest<MovieResponse>(
                 'search/tv',
                 { method: 'GET' },
                 { query: searchText, include_adult: false }
             );
 
             if (response.status === 200) {
-                setTvShows(response.data);
-                console.log('TV shows results:', response.data);
+                setTvShows(response.data.results);
+                setTotalTvShows(response.data.total_results);
             } else {
                 throw new Error(`Error fetching search results: ${response.statusText}`);
             }
@@ -61,15 +65,15 @@ export const useSearch = () => {
     async function searchPeople(searchText: string) {
          try {
             setLoading(true);
-            const response = await apiRequest<People[]>(
+            const response = await apiRequest<PeopleResponse>(
                 'search/person',
                 { method: 'GET' },
                 { query: searchText, include_adult: false }
             );
 
             if (response.status === 200) {
-                setPeople(response.data);
-                console.log('Persons results:', response.data);
+                setPeople(response.data.results);
+                setTotalPeople(response.data.total_results);
             } else {
                 throw new Error(`Error fetching search results: ${response.statusText}`);
             }
@@ -91,5 +95,8 @@ export const useSearch = () => {
         searchMovies,
         searchTVShows,
         searchPeople,
+        totalMovies,
+        totalTvShows,
+        totalPeople
     };
 }
